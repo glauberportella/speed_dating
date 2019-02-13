@@ -75,8 +75,8 @@ def nbc(t_frac):
     correct_predictions_test = inference(testset)
     accuracy_test = correct_predictions_test[1]/(correct_predictions_test[1] + correct_predictions_test[0])
     accuracy_train = correct_predictions_train[1]/(correct_predictions_train[1] + correct_predictions_train[0])
-    print ("Training Accuracy:", accuracy_train)
-    print ("Testing Accuracy:", accuracy_test)
+    print ("Training Accuracy:", round(accuracy_train,2))
+    print ("Testing Accuracy:", round(accuracy_test,2))
 
     return accuracy_train, accuracy_test
 

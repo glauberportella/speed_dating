@@ -1,6 +1,11 @@
-import matplotlib.pyplot as plt
 import pandas as pd
 import numpy as np
+
+import matplotlib as mpl
+mpl.use('Agg')
+import matplotlib.pyplot as plt
+mpl.rcParams['figure.figsize'] = (7,7)
+
 
 participant_cols = ['attractive_important', 'sincere_important', 'intelligence_important', 'funny_important', 'ambition_important', 'shared_interests_important']    
 

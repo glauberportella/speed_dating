@@ -1,6 +1,11 @@
 import numpy as np
-import matplotlib.pyplot as plt
 import pandas as pd
+
+import matplotlib as mpl
+mpl.use('Agg')
+import matplotlib.pyplot as plt
+mpl.rcParams['figure.figsize'] = (7,7)
+
 
 def get_success_rate(dataframe, attribute, value):
     dating_attribute_value = dataframe[dataframe[attribute] == value]
