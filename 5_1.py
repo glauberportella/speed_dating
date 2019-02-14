@@ -7,6 +7,19 @@ count_dict_yes = {}
 count_dict_no = {}
 prior_probability_dict = {}
 
+
+def get_probability(attribute, value, decision):
+    if decision == 1:
+        value_count = 0
+        if value in count_dict_yes[attribute]:
+            value_count = count_dict_yes[attribute][value]
+        return (value_count+1.0)/(count_dict_yes['decision'][1]+len(count_dict_yes[attribute]))
+    elif decision == 0:
+        value_count = 0
+        if value in count_dict_no[attribute]:
+            value_count = count_dict_no[attribute][value]
+        return (value_count+1.0)/(count_dict_no['decision'][0]+len(count_dict_no[attribute]))
+
 def inference_row(row):
     correct = 0
     prob_dec_1 = 1
@@ -41,18 +54,6 @@ def inference(dataset):
     dataset['correct_prediction'] = dataset.apply(inference_row, axis=1)
     correct_prediction_dict = dataset['correct_prediction'].value_counts().to_dict()
     return correct_prediction_dict
-
-def get_probability(attribute, value, decision):
-    if decision == 1:
-        value_count = 0
-        if value in count_dict_yes[attribute]:
-            value_count = count_dict_yes[attribute][value]
-        return (value_count+1.0)/(count_dict_yes['decision'][1]+len(count_dict_yes[attribute]))
-    elif decision == 0:
-        value_count = 0
-        if value in count_dict_no[attribute]:
-            value_count = count_dict_no[attribute][value]
-        return (value_count+1.0)/(count_dict_no['decision'][0]+len(count_dict_no[attribute]))
 
 def nbc(t_frac):
     trainset = pd.read_csv(training_file)

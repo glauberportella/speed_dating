@@ -2,5 +2,6 @@ My name is Mohit. I am using python 3 for my code. The core logic is developed w
 
 Finally, the naive bayes classifier algorithm is written in 5_1.py file. The main logic is in function named nbc(t_frac). In 5_2.py and 5_3.py, there is code for plotting graphs for variation of number of bins with accuracy and fraction of training data with accuracy respectively.
 
-The detailed report can be found in CS573_HW2.pdf
+The detailed report can be found in CS573_HW2.pdf.
+
 Happy Coding!
