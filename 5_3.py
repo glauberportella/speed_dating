@@ -26,6 +26,7 @@ def main():
     do_discretize(num_bin)
     split_dataset(0.2, 47, "dating-binned.csv")
     for t_frac in t_frac_list:
+        print ("Running Naive Bayes Classifier for f:", t_frac)
         accuracy_train, accuracy_test = nbc_file.nbc(t_frac)
         train_scores.append(accuracy_train)
         test_scores.append(accuracy_test)
