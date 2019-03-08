@@ -30,6 +30,7 @@ def get_encoding(column):
 
 def main():
     dating = pd.read_csv('dating-full.csv')
+    dating = dating.head(6500)
     
     dating[['race','race_o','field']] = dating[['race','race_o','field']].apply(remove_quotes)
     dating[['field']] = dating[['field']].apply(convert_lowercase)

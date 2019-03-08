@@ -1,8 +1,5 @@
 import pandas as pd
 
-training_file = "trainingSet.csv"
-test_file = "testSet.csv"
-
 count_dict_yes = {}
 count_dict_no = {}
 prior_probability_dict = {}
@@ -55,10 +52,8 @@ def inference(dataset):
     correct_prediction_dict = dataset['correct_prediction'].value_counts().to_dict()
     return correct_prediction_dict
 
-def nbc(t_frac):
-    trainset = pd.read_csv(training_file)
-    trainset=trainset.sample(frac=t_frac,random_state=47)
-    testset = pd.read_csv(test_file)
+def nbc(t_frac, trainset, testset, random_state):
+    trainset=trainset.sample(frac=t_frac,random_state=random_state)
     
     for column in trainset:
         count_dict_yes[column] = trainset[trainset['decision'] == 1][column].value_counts(sort=False).to_dict()
@@ -74,8 +69,8 @@ def nbc(t_frac):
 
     correct_predictions_train = inference(trainset)
     correct_predictions_test = inference(testset)
-    accuracy_test = correct_predictions_test[1]/(correct_predictions_test[1] + correct_predictions_test[0])
-    accuracy_train = correct_predictions_train[1]/(correct_predictions_train[1] + correct_predictions_train[0])
+    accuracy_test = correct_predictions_test[1]*1.0/(correct_predictions_test[1] + correct_predictions_test[0])
+    accuracy_train = correct_predictions_train[1]*1.0/(correct_predictions_train[1] + correct_predictions_train[0])
     print ("Training Accuracy:", round(accuracy_train,2))
     print ("Testing Accuracy:", round(accuracy_test,2))
 
@@ -83,8 +78,13 @@ def nbc(t_frac):
 
 
 def main():
+    training_file = "trainingSet_nbc.csv"
+    test_file = "testSet_nbc.csv"
     t_frac = 1
-    accuracy_train, accuracy_test = nbc(t_frac)
+    trainset = pd.read_csv(training_file)
+    testset = pd.read_csv(test_file)
+    random_state = 47
+    accuracy_train, accuracy_test = nbc(t_frac, trainset, testset, random_state)
 
 if __name__ == '__main__':
     main()
